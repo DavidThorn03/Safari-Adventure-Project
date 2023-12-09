@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private float jumpForce = 600;
     public bool isOnGround = true;
     private GameManager gm;
+    private Animator playerAnim;
     
     //AD
     private bool hasDestroyAbility = false;
@@ -20,25 +21,29 @@ public class PlayerController : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody>();
         gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        playerAnim = GetComponent<Animator>();
     }
 
 
     void Update()
     {
-            if(transform.position.x < -xRange){
-                transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
-            }
-            if(transform.position.x > xRange){
-                transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
-            }
-            if(isOnGround && gm.isGameActive){
-                horizontalInput = Input.GetAxis("Horizontal");
-                transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-            }
-            if(isOnGround && gm.isGameActive && Input.GetKeyDown(KeyCode.UpArrow)){
-                playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                isOnGround = false;
-            }
+        //playerAnim.SetFloat("Speed_f", 0.5f + (gm.score / 5));
+        if(transform.position.x < -xRange){
+            transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+        }
+        if(transform.position.x > xRange){
+            transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+        }
+        if(isOnGround && gm.isGameActive){
+            playerAnim.SetBool("Jump_b", false);
+            horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        }
+        if(isOnGround && gm.isGameActive && Input.GetKeyDown(KeyCode.UpArrow)){
+            playerAnim.SetBool("Jump_b", true);
+            playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isOnGround = false;
+        }
             
             //AD
         if (hasDestroyAbility && Input.GetKeyDown(KeyCode.Space))
@@ -54,6 +59,7 @@ public class PlayerController : MonoBehaviour
         else if(collision.gameObject.CompareTag("Enemy")){
             Debug.Log("GameOver");
             gm.GameOver();
+            playerAnim.SetBool("Death_b", true);
         }
     }
 
