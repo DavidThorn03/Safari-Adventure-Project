@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+        
         //playerAnim.SetFloat("Speed_f", 0.5f + (gm.score / 5));
         if(transform.position.x < -xRange){
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
