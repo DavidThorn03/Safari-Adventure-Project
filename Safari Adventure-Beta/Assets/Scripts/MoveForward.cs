@@ -5,7 +5,6 @@ using UnityEngine;
 public class MoveForward : MonoBehaviour
 {
     private GameManager gm;
-    public float speed;
     private float lowerBounds = -10;
 
     // Start is called before the first frame update
@@ -19,7 +18,7 @@ public class MoveForward : MonoBehaviour
     {
         if (gm.isGameActive)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            transform.Translate(Vector3.forward * Time.deltaTime * gm.playerSpeed);
         }
         if (transform.position.z < lowerBounds)
         {

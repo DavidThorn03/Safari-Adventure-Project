@@ -12,13 +12,13 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
-        speed = 10.0f;
+        speed = gm.playerSpeed + 5;
     }
 
     // Update is called once per frame
     void Update()
     {
-        speed = 10.0f + (gm.score / 5);
+        speed = gm.playerSpeed + 5 + (gm.score / 5);
         if (gm.isGameActive)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * speed);

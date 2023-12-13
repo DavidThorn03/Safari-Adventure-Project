@@ -12,11 +12,10 @@ public class PlayerController : MonoBehaviour
     public bool isOnGround = true;
     private GameManager gm;
     private Animator playerAnim;
+    public bool StrPower = false;
+    public bool GunPower = false; 
+    public GameObject powerupIndicator;
     
-    //AD
-    private bool hasDestroyAbility = false;
-    
-
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
@@ -27,9 +26,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
-        
-        //playerAnim.SetFloat("Speed_f", 0.5f + (gm.score / 5));
         if(transform.position.x < -xRange){
             transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
         }
@@ -46,33 +42,58 @@ public class PlayerController : MonoBehaviour
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
         }
-            
-            //AD
-        if (hasDestroyAbility && Input.GetKeyDown(KeyCode.Space))
-        {
-            DestroyObjects();
-        }
+        powerupIndicator.transform.position = transform.position + new Vector3(0f, 0.5f, 0f);
+        powerupIndicator.transform.Rotate(0f, 0.5f, 0f);
     }
 
-    private void OnCollisionEnter(Collision collision){    
-        if(collision.gameObject.CompareTag("Ground")){
+
+    private void OnCollisionEnter(Collision collision){  
+        if(collision.gameObject.CompareTag("StrPower")){
+            Destroy(collision.gameObject);
+            StrPower = true;
+            GunPower = false;
+            gm.playerSpeed = 10;
+            playerAnim.SetFloat("Speed_f", 1f);
+            powerupIndicator.gameObject.SetActive(true);
+            PowerupCountdownRoutine();
+        }
+
+        else if(collision.gameObject.CompareTag("GunPower")){
+            Destroy(collision.gameObject);
+            Debug.Log("hit it");
+            StrPower = false;
+            GunPower = true;
+            powerupIndicator.gameObject.SetActive(true);
+            PowerupCountdownRoutine();
+        }
+
+        else if(collision.gameObject.CompareTag("Ground")){
             isOnGround = true;
         }
+
         else if(collision.gameObject.CompareTag("Enemy")){
-            Debug.Log("GameOver");
-            gm.GameOver();
-            playerAnim.SetBool("Death_b", true);
+            if(!StrPower){
+                Debug.Log("GameOver");
+                gm.GameOver();
+                if(playerAnim.GetBool("Jump_b")){
+                    playerAnim.SetInteger("DeathType_int", 2);
+                }
+                playerAnim.SetBool("Death_b", true);
+            }
+            else{
+                Destroy(collision.gameObject);
+                gm.UpdateScore(1);
+            }
         }
     }
 
-        //AD
-    public void EnableDestroyAbility()
+    IEnumerator PowerupCountdownRoutine()
     {
-        hasDestroyAbility = true;
+        yield return new WaitForSeconds(7);
+        powerupIndicator.gameObject.SetActive(false);
+        playerAnim.SetFloat("Speed_f", 0.5f);
+        gm.playerSpeed = 5;
+        StrPower = false;
+        GunPower = false;
     }
-    private void DestroyObjects()
-    {
-        Destroy(GameObject.FindWithTag("Enemy"));
-    }
-   
 }

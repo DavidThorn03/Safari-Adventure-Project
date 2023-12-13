@@ -5,18 +5,26 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
+    public bool StrPower = false;
+    public bool GunPower = false; 
+    private PlayerController playerController;
+
+    void Start()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            // Assuming the player controller script is on the player object
-            PlayerController playerController = other.GetComponent<PlayerController>();
-
-            if (playerController != null)
-            {
-                playerController.EnableDestroyAbility();
-                Destroy(gameObject); // Remove the power-up from the scene
+            if(CompareTag("StrPower")){
+                //strength powerup
+                StrPower = true;
+            }
+            if(CompareTag("GunPower")){
+                //gunPowerUp
+                GunPower = true;
             }
         }
     }

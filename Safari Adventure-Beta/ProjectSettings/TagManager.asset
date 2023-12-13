@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - PowerUp
   - Game Manager
+  - StrPower
+  - GunPower
   layers:
   - Default
   - TransparentFX
