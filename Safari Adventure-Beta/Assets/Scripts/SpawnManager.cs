@@ -24,7 +24,8 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+        //powerups[0].transform.Rotate(0, 0, 0);
+        //powerups[1].transform.Rotate(0, 0, 0);
     }
 
     void SpawnEnemy()

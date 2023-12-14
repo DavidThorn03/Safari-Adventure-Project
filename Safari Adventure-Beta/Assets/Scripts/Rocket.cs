@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    private int upperBound = 20;
+    private int upperBound = 75;
     private int speed = 10;
 
     private GameManager gm;
