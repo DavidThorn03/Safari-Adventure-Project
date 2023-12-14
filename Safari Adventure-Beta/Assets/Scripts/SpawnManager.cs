@@ -24,8 +24,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //powerups[0].transform.Rotate(0, 0, 0);
-        //powerups[1].transform.Rotate(0, 0, 0);
+    
     }
 
     void SpawnEnemy()
@@ -41,7 +40,7 @@ public class SpawnManager : MonoBehaviour
     {
         if(gm.isGameActive){
         Vector3 spawnPos = new Vector3(Random.Range(-spawnRangex, spawnRangex), 2, spawnPosz);
-        int i = Random.Range(0, 1);
+        int i = Random.Range(0, 2);
         Instantiate(powerups[i], spawnPos, enemy.transform.rotation);
         }
         spawnInterval = Random.Range(10, 20);
