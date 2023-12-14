@@ -7,7 +7,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemy;
     public GameObject[] powerups;
     private float spawnRangex = 10;
-    private float spawnPosz = 20;
+    private float spawnPosz = 70;
     private float enemystartDelay = 1.5f;
     private float powerstartDelay = 5;
     private float spawnInterval;
@@ -40,7 +40,7 @@ public class SpawnManager : MonoBehaviour
     {
         if(gm.isGameActive){
         Vector3 spawnPos = new Vector3(Random.Range(-spawnRangex, spawnRangex), 2, spawnPosz);
-        int i = Random.Range(1, 2);
+        int i = Random.Range(0, 1);
         Instantiate(powerups[i], spawnPos, enemy.transform.rotation);
         }
         spawnInterval = Random.Range(10, 20);

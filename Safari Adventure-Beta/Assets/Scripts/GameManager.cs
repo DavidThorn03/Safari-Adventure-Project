@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;   
     public int score;
     public int playerSpeed = 5;
-
     public GameObject enemyPrefab;
     // Start is called before the first frame update
     void Start()
