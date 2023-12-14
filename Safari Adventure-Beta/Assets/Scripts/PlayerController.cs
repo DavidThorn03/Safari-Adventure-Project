@@ -7,14 +7,18 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     private float speed = 10.0f;
     private float xRange = 10;
-    private Rigidbody playerRB;
     private float jumpForce = 600;
-    public bool isOnGround = true;
+
+    private bool StrPower = false;
+    private bool GunPower = false; 
+    private bool isOnGround = true;
+
+    private Rigidbody playerRB;
     private GameManager gm;
     private Animator playerAnim;
-    public bool StrPower = false;
-    public bool GunPower = false; 
+    
     public GameObject powerupIndicator;
+    public GameObject rocket;
     
     void Start()
     {
@@ -42,6 +46,10 @@ public class PlayerController : MonoBehaviour
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
         }
+        if(Input.GetKeyDown(KeyCode.Space) && GunPower){
+            Instantiate(rocket, transform.position + new Vector3(0f, 1f, 1f), rocket.transform.rotation);
+        }
+
         powerupIndicator.transform.position = transform.position + new Vector3(0f, 0.5f, 0f);
         powerupIndicator.transform.Rotate(0f, 0.5f, 0f);
     }
@@ -50,21 +58,12 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision){  
         if(collision.gameObject.CompareTag("StrPower")){
             Destroy(collision.gameObject);
-            StrPower = true;
-            GunPower = false;
-            gm.playerSpeed = 10;
-            playerAnim.SetFloat("Speed_f", 1f);
-            powerupIndicator.gameObject.SetActive(true);
-            PowerupCountdownRoutine();
+            StrPowerMethod();
         }
 
         else if(collision.gameObject.CompareTag("GunPower")){
             Destroy(collision.gameObject);
-            Debug.Log("hit it");
-            StrPower = false;
-            GunPower = true;
-            powerupIndicator.gameObject.SetActive(true);
-            PowerupCountdownRoutine();
+            GunPowerMethod();
         }
 
         else if(collision.gameObject.CompareTag("Ground")){
@@ -89,11 +88,24 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PowerupCountdownRoutine()
     {
-        yield return new WaitForSeconds(7);
+        powerupIndicator.gameObject.SetActive(true);
+        yield return new WaitForSeconds(5);
         powerupIndicator.gameObject.SetActive(false);
         playerAnim.SetFloat("Speed_f", 0.5f);
         gm.playerSpeed = 5;
         StrPower = false;
         GunPower = false;
     }
+    private void StrPowerMethod(){
+        StrPower = true;
+        GunPower = false;
+        gm.playerSpeed = 10;
+        playerAnim.SetFloat("Speed_f", 1f);
+        StartCoroutine(PowerupCountdownRoutine());
+    }
+    private void GunPowerMethod(){
+        StrPower = false;
+        GunPower = true;
+        StartCoroutine(PowerupCountdownRoutine());
+    } 
 }

@@ -157,7 +157,7 @@ MonoBehaviour:
   scoreText: {fileID: 1956952701}
   score: 0
   playerSpeed: 5
-  enemyPrefab: {fileID: 6777930229472633749, guid: 7442df2eb76023d4387c15a485491e73,
+  enemyPrefab: {fileID: 863551499387334016, guid: d1726e5587b78c8418b41bfc7c186da4,
     type: 3}
 --- !u!4 &10683360
 Transform:
@@ -2060,7 +2060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c703375f0c4df44b810b6579737520c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 6777930229472633749, guid: 7442df2eb76023d4387c15a485491e73, type: 3}
+  enemy: {fileID: 863551499387334016, guid: d1726e5587b78c8418b41bfc7c186da4, type: 3}
   powerups:
   - {fileID: 996534173676287105, guid: ea76789d565ae4a43a603cf422e34a62, type: 3}
   - {fileID: 5156263874286222874, guid: e86c138b16610fc4397ff0528abb9d94, type: 3}
@@ -2387,10 +2387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac730d3bdffee34bb32e17d072ba601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOnGround: 1
-  StrPower: 0
-  GunPower: 0
   powerupIndicator: {fileID: 1615690947}
+  rocket: {fileID: 711583776037596449, guid: 92725dace0da9524a85b50c05c3200fc, type: 3}
 --- !u!65 &1914861737
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2780,8 +2778,7 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3719803893853183923, guid: ea76789d565ae4a43a603cf422e34a62, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

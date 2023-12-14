@@ -30,7 +30,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnEnemy()
     {
         if(gm.isGameActive){
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangex, spawnRangex), 2, spawnPosz);
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangex, spawnRangex), 0, spawnPosz);
         Instantiate(enemy, spawnPos, enemy.transform.rotation);
         }
         spawnInterval = Random.Range(1.5f / (1 + (gm.score / 5)), 3.5f / (1 + (gm.score / 5)));
