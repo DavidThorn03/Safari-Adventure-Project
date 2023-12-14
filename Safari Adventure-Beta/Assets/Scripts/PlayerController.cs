@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private bool StrPower = false;
     private bool GunPower = false; 
-    private bool isOnGround = true;
+    private bool isOnGround = false;
 
     private Rigidbody playerRB;
     private GameManager gm;
