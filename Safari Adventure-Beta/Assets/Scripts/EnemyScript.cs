@@ -20,8 +20,14 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemyAnim.SetFloat("Speed_f", 1 + (gm.score / 30));
-        speed = (gm.playerSpeed + 5) + (gm.score / 5);
+        if(gm.score < 100){
+            enemyAnim.SetFloat("Speed_f", 1 + (gm.score / 30));
+            speed = (gm.playerSpeed + 5) + (gm.score / 5);
+        }
+        else{
+            enemyAnim.SetFloat("Speed_f", 34);
+            speed = gm.playerSpeed + 25;
+        }
         if (gm.isGameActive)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * speed);

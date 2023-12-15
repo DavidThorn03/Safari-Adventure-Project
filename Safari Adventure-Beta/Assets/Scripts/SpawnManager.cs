@@ -30,17 +30,22 @@ public class SpawnManager : MonoBehaviour
     void SpawnEnemy()
     {
         if(gm.isGameActive){
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangex, spawnRangex), 0, spawnPosz);
-        Instantiate(enemy, spawnPos, enemy.transform.rotation);
+            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangex, spawnRangex), 0, spawnPosz);
+            Instantiate(enemy, spawnPos, enemy.transform.rotation);
         }
-        spawnInterval = Random.Range(1.5f / (1 + (gm.score / 5)), 3.5f / (1 + (gm.score / 5)));
+        if(gm.score < 100){
+            spawnInterval = Random.Range(1.5f / (1 + (gm.score / 5)), 3.5f / (1 + (gm.score / 5)));
+        }
+        else{
+            spawnInterval = Random.Range(0.075f , 0.175f);
+        }
         Invoke("SpawnEnemy", spawnInterval);
     }
     void SpawnPowerUp()
     {
         if(gm.isGameActive){
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangex, spawnRangex), 2, spawnPosz);
-        int i = Random.Range(0, 2);
+            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangex, spawnRangex), 2, spawnPosz);
+            int i = Random.Range(0, 2);
         Instantiate(powerups[i], spawnPos, enemy.transform.rotation);
         }
         spawnInterval = Random.Range(10, 20);
