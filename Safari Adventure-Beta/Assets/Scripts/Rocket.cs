@@ -6,32 +6,39 @@ public class Rocket : MonoBehaviour
 {
     private int upperBound = 75;
     private int speed = 10;
+
+    //explosion effect
     public ParticleSystem explosion;
+
+    //game manager script to use game manager methods and variables
     private GameManager gm;
-    // Start is called before the first frame update
+
     void Start()
     {
-        gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gm = GameObject.Find("Game Manager").GetComponent<GameManager>();//set game manager
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);//move forward over time
+        //if object reaches upper bound (leaves view) destroy is
         if(transform.position.z > upperBound){
             Destroy(gameObject);
         }
     }
-    IEnumerator PowerupCountdownRoutine()
+    //wait 0.3 seconds before destroying rocket so particle effect can play
+    IEnumerator explosionCountdown()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
     private void OnCollisionEnter(Collision collision){  
-        if(collision.gameObject.CompareTag("Enemy")){
-            explosion.Play();
-            gm.UpdateScore(1);
+        if(collision.gameObject.CompareTag("Enemy")){//if enemy is hit
+            explosion.Play();//play explosion
+            gm.UpdateScore(1);//update score when enemy destroyed
             Destroy(collision.gameObject);
+            StartCoroutine(explosionCountdown());//start countdown
         }
 
     }

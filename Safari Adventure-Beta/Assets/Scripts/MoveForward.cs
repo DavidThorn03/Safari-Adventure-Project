@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class MoveForward : MonoBehaviour
 {
+    //game manager script to use game manager methods and variables
     private GameManager gm;
     private float lowerBounds = -10;
 
-    // Start is called before the first frame update
     void Start()
     {
-        gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gm = GameObject.Find("Game Manager").GetComponent<GameManager>();//set game manager
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (gm.isGameActive)
-        {
-            transform.Translate(Vector3.forward * Time.deltaTime * gm.playerSpeed);
-        }
+        //if object enters lower bounds(leaves screen behind player) destroy it
         if (transform.position.z < lowerBounds)
         {
             Destroy(gameObject);
         }
+        transform.Translate(Vector3.forward * Time.deltaTime * gm.playerSpeed);//move forward
     }
 }
