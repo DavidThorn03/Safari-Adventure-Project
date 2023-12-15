@@ -8,6 +8,7 @@ public class EnemyScript : MonoBehaviour
     public float speed;
     private float lowerBounds = -10;
     private Animator enemyAnim;
+    public ParticleSystem dirt;
 
 
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class EnemyScript : MonoBehaviour
     {
         gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
         enemyAnim = GetComponent<Animator>();
+        dirt.Play();
     }
 
     // Update is called once per frame
@@ -28,10 +30,8 @@ public class EnemyScript : MonoBehaviour
             enemyAnim.SetFloat("Speed_f", 34);
             speed = gm.playerSpeed + 25;
         }
-        if (gm.isGameActive)
-        {
-            transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        }
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        
         if (transform.position.z < lowerBounds)
         {
             Destroy(gameObject);

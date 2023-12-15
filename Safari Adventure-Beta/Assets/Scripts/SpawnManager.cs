@@ -7,7 +7,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject enemy;
     public GameObject[] powerups;
     private float spawnRangex = 10;
-    private float spawnPosz = 70;
+    private float spawnPosz = 80;
     private float enemystartDelay = 1.5f;
     private float powerstartDelay = 5;
     private float spawnInterval;

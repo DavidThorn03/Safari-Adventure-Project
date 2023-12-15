@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private float horizontalInput;
     private float speed = 10.0f;
-    private float xRange = 10;
+    private float xRange = 9;
     private float jumpForce = 600;
 
     private bool StrPower = false;
