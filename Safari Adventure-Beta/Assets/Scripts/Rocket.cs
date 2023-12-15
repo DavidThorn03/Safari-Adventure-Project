@@ -22,13 +22,16 @@ public class Rocket : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    IEnumerator PowerupCountdownRoutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Destroy(gameObject);
+    }
     private void OnCollisionEnter(Collision collision){  
         if(collision.gameObject.CompareTag("Enemy")){
             explosion.Play();
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
             gm.UpdateScore(1);
+            Destroy(collision.gameObject);
         }
 
     }
