@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public int score;
     public int playerSpeed = 5;
     public GameObject enemyPrefab;
+    public ParticleSystem dust;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         gameOver.SetActive(true);
         isGameActive = false;
+        dust.Stop();
     }
     public void RestartGame()
     {

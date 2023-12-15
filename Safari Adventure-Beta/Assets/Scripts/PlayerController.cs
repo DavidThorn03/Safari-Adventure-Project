@@ -19,12 +19,21 @@ public class PlayerController : MonoBehaviour
     
     public GameObject powerupIndicator;
     public GameObject rocket;
-    
+
+    public ParticleSystem dust;
+    public ParticleSystem explosion;
+
+    public AudioClip jumpSound;
+    public AudioClip crashSound;
+    public AudioSource playerAudio;
+    public AudioSource musicAudio;
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
         gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
         playerAnim = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
+        dust.Play();
     }
 
 
@@ -45,6 +54,8 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("Jump_b", true);
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
+            playerAudio.PlayOneShot(jumpSound, 1.0f);
+            dust.Stop();
         }
         if(Input.GetKeyDown(KeyCode.Space) && GunPower){
             Instantiate(rocket, transform.position + new Vector3(0f, 1f, 1f), rocket.transform.rotation);
@@ -68,21 +79,33 @@ public class PlayerController : MonoBehaviour
 
         else if(collision.gameObject.CompareTag("Ground")){
             isOnGround = true;
+            dust.Play();
         }
 
         else if(collision.gameObject.CompareTag("Enemy")){
             if(!StrPower){
                 Debug.Log("GameOver");
                 gm.GameOver();
+                explosion.Play();
                 if(playerAnim.GetBool("Jump_b")){
                     playerAnim.SetInteger("DeathType_int", 2);
                 }
                 playerAnim.SetBool("Death_b", true);
+                StopMusic();
+                playerAudio.PlayOneShot(crashSound, 1.0f);
             }
             else{
                 Destroy(collision.gameObject);
                 gm.UpdateScore(1);
             }
+            dust.Stop();
+        }
+    }
+
+    private void StopMusic(){
+        if (musicAudio != null)
+        {
+            musicAudio.Stop();
         }
     }
 
