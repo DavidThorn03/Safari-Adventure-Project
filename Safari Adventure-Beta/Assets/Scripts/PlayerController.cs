@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip crashSound;
     public AudioSource playerAudio;
-    public AudioSource musicAudio;
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
@@ -91,7 +90,6 @@ public class PlayerController : MonoBehaviour
                     playerAnim.SetInteger("DeathType_int", 2);
                 }
                 playerAnim.SetBool("Death_b", true);
-                StopMusic();
                 playerAudio.PlayOneShot(crashSound, 1.0f);
             }
             else{
@@ -99,13 +97,6 @@ public class PlayerController : MonoBehaviour
                 gm.UpdateScore(1);
             }
             dust.Stop();
-        }
-    }
-
-    private void StopMusic(){
-        if (musicAudio != null)
-        {
-            musicAudio.Stop();
         }
     }
 
