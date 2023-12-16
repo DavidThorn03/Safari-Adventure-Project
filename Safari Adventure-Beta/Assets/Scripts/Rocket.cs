@@ -8,7 +8,9 @@ public class Rocket : MonoBehaviour
     private int speed = 10;
 
     //explosion effect
-    public ParticleSystem explosion;
+    public ParticleSystem boom;
+    public AudioClip boomSound;
+    public AudioSource boomAudio;
 
     //game manager script to use game manager methods and variables
     private GameManager gm;
@@ -35,7 +37,8 @@ public class Rocket : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision){  
         if(collision.gameObject.CompareTag("Enemy")){//if enemy is hit
-            explosion.Play();//play explosion
+            boom.Play();//play explosion
+            boomAudio.PlayOneShot(boomSound, 1.0f);//play explosion sound
             gm.UpdateScore(1);//update score when enemy destroyed
             Destroy(collision.gameObject);
             StartCoroutine(explosionCountdown());//start countdown
