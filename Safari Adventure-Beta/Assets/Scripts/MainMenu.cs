@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
     //DT
     public void GitHubBtn()
     {
-        Application.OpenURL("https://github.com/DavidThorn03/IMM-Project.git");
+        Application.OpenURL("https://github.com/DavidThorn03/IMM-Project-Beta.git");
     }
 }
 

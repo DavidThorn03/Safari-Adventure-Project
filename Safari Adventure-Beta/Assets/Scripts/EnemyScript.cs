@@ -28,7 +28,7 @@ public class EnemyScript : MonoBehaviour
             speed = (gm.playerSpeed + 5) + (gm.score / 5);
         }
         else{//if score is greater then 100 dont increase speed
-            enemyAnim.SetFloat("Speed_f", 34);
+            enemyAnim.SetFloat("Speed_f", 4);
             speed = gm.playerSpeed + 25;
         }
         transform.Translate(Vector3.forward * Time.deltaTime * speed);//move forward
