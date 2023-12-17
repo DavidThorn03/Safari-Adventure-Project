@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
         if(gm.isGameActive)
         {
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangex, spawnRangex), 2, spawnPosz);//create random spawn position on x axis
-            int i = Random.Range(0, 2);//randomly select which powerup is spawned
+            int i = Random.Range(0, 1);//randomly select which powerup is spawned
             Instantiate(powerups[i], spawnPos, enemy.transform.rotation);//spawn
         }
         spawnInterval = Random.Range(10, 20);//randomly spawn time between 10 and 20 seconds
