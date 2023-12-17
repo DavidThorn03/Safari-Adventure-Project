@@ -7,23 +7,20 @@ public class MainMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
 
-    public void PlayBtn()
+    public void PlayBtn(int sceneID)
     {
-        Debug.Log("Play Game");
-        SceneManager.LoadScene(0);//load scene
+        SceneManager.LoadScene(sceneID);//load scene
         pauseMenu.SetActive(false);//hide pause menu
         Time.timeScale = 1f;//unfreeze game
     }
 
     public void InstBtn(int sceneID)
     {
-        Debug.Log("Instructions");
         SceneManager.LoadScene(sceneID);//load scene
     }
 
     public void BackBtn(int sceneID)
     {
-        Debug.Log("Main Menu");
         SceneManager.LoadScene(sceneID);//load scene
     }
     public void GitHubBtn()

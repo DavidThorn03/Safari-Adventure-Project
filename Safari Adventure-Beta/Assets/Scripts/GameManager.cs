@@ -38,9 +38,9 @@ public class GameManager : MonoBehaviour
         dust.Stop();
     }
     //reset all variables and restart game(for buttons)
-    public void RestartGame()
+    public void RestartGame(int sceneID)
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(sceneID);
         gameOver.SetActive(false);
         isGameActive = true;
     }
