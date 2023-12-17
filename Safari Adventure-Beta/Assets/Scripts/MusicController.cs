@@ -11,15 +11,15 @@ public class MusicController : MonoBehaviour
 
     void Start()
     {
-        musicSource.clip = music;
-        musicSource.Play();
-        gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        musicSource.clip = music;//set music clip
+        musicSource.Play();//play music
+        gm = GameObject.Find("Game Manager").GetComponent<GameManager>();//find game manager
     }
 
     void Update()
     {
         if(!gm.isGameActive){
-            musicSource.Stop();
+            musicSource.Stop();//stop music when game is over
         }
     }
 }

@@ -10,27 +10,24 @@ public class MainMenu : MonoBehaviour
     public void PlayBtn()
     {
         Debug.Log("Play Game");
-        SceneManager.LoadScene(0);
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);//load scene
+        pauseMenu.SetActive(false);//hide pause menu
+        Time.timeScale = 1f;//unfreeze game
     }
 
     public void InstBtn(int sceneID)
     {
         Debug.Log("Instructions");
-        SceneManager.LoadScene(sceneID);
+        SceneManager.LoadScene(sceneID);//load scene
     }
 
     public void BackBtn(int sceneID)
     {
         Debug.Log("Main Menu");
-        SceneManager.LoadScene(sceneID);
+        SceneManager.LoadScene(sceneID);//load scene
     }
-    //DT
     public void GitHubBtn()
     {
-        Application.OpenURL("https://github.com/DavidThorn03/IMM-Project-Beta.git");
+        Application.OpenURL("https://github.com/DavidThorn03/IMM-Project-Beta.git");//open github repo
     }
 }
-
-

@@ -6,22 +6,22 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
-   
+
     public void PauseGame()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
+        pauseMenu.SetActive(true);//show pause menu
+        Time.timeScale = 0f;//freeze game
     }
 
     public void ResumeGame()
     {
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);//hide pause menu
+        Time.timeScale = 1f;//unfreeze game
     }
 
     public void Home(int sceneID)
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(sceneID);
+        Time.timeScale = 1f;//unfreeze game
+        SceneManager.LoadScene(sceneID);//load scene
     }
 }
